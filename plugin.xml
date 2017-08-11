@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin title="Pentaho Adhoc Reporting" name="waqr">
+
+    <overlays>
+	    <overlay id="startup.waqr"  resourcebundle="content/waqr/resources/messages/messages">
+            <menubar id="newmenu">
+                    <menuitem id="adhoc2rep" label="${Launcher.NEW_REPORT_TOOLTIP}" command="mantleXulHandler.openUrl('Adhoc','Adhoc','api/repos/xwaqr/editor')" />
+            </menubar>
+	    </overlay>
+	    
+	    
+    	<overlay id="launch" resourcebundle="content/waqr/resources/messages/messages">
+			<button id="launch_new_waqr"
+				command="Home.openFile('Adhoc','Adhoc','api/repos/xwaqr/editor')"
+				label="WAQR" />
+		</overlay>	    
+	    
+    </overlays>  
+    
+   <static-paths>
+     <static-path url="/waqr/resources" localFolder="resources"/>
+   </static-paths>
+
+	<content-types>
+		<content-type type="xwaqr" mime-type="text/html">
+        	<title>Ad-Hoc report</title>
+        	<description></description>
+	        <icon-url>api/repos/xwaqr/resources/images/adhoc-icon-small.png</icon-url>
+            <meta-provider>org.pentaho.platform.engine.services.solution.ActionSequenceFileInfo</meta-provider>
+	        <operations>
+    		    	<operation>
+    				<id>RUN</id>
+       			</operation>
+	    	    	<operation>
+	       			<id>NEWWINDOW</id>
+	       		</operation>        		
+	        	<operation>
+    	    		<id>EDIT</id>
+            		<perspective>editor</perspective>
+        		</operation>
+	        </operations>
+    	</content-type>
+
+	</content-types>
+	<content-generator id="xwaqr.editor" type="xwaqr.editor" class="org.pentaho.platform.plugin.adhoc.AdhocEditorContentGenerator"/>
+</plugin>
