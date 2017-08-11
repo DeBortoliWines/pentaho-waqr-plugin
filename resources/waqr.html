@@ -352,6 +352,13 @@
     }
 
     function extractFileNameFromUrl( url ) {
+      // Pentaho now gives file urls structured like:
+      // `/api/repos/%3Ahome%3Auser%3Areport.xwaqr/editor?ts=123`
+      // (using '%3A' delimiter instead of ':') WAQR fails to then load
+      // any saved files. We can just do a translation back to the ':' delimiter
+      // so it is backwards and forwards compatible.
+      url = url.replace(/%3A/g, ":");
+
       var startIndex = url.indexOf("api/repos/");
       url = url.substr(startIndex, url.length);
       if( startIndex != -1 ) {
